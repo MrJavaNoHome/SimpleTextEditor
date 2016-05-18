@@ -33,7 +33,7 @@ public class FontWindow extends JFrame {
     public FontWindow(TextEditor mainFrameWindow) {
 
         this.mainFrameWindow = mainFrameWindow;
-        setTitle("Ustawienia czcionki");
+        setTitle("Font settings");
         String fonts[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         JList fontNameList = new JList(fonts);
         JScrollPane fontNameScroller = new JScrollPane(fontNameList);

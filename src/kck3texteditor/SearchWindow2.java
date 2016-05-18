@@ -155,22 +155,6 @@ public class SearchWindow2 extends javax.swing.JFrame {
         int pointerLocation = mainFrame.area.getCaretPosition();
         Highlighter h = mainFrame.area.getHighlighter();
 
-//        if (pointerLocation == document.length()) {
-//            Object[] options = {"Tak", "Nie"};
-//
-//            int n = JOptionPane.showOptionDialog(this,
-//                    "Wyszukiwanie doszło do konca pliku. Zacząć od początku?",
-//                    "",
-//                    JOptionPane.YES_NO_CANCEL_OPTION,
-//                    JOptionPane.QUESTION_MESSAGE,
-//                    null,
-//                    options,
-//                    options[1]);
-//
-//            if (n == 0) {
-//                pointerLocation = 0;
-//            }
-//        }
         if (document != null && document.length() > 0) {
 
             if (!matchCase) {
@@ -180,19 +164,17 @@ public class SearchWindow2 extends javax.swing.JFrame {
 
             int foundIndex = document.indexOf(valueToFind, pointerLocation);
 
-            //Cale slowa - Znaleziono slowo && spr czy to cale slowo
             if (wholeWord && foundIndex != -1) {
                 CharSequence cs = " ";
                 
-                //Spr czy nie zawiera spacji
                 if (!valueToFind.contains(cs)) {
-                    //Szukana na początku dokumentu
+
                     if (foundIndex == 0) {
                         String neighbourCharsString = document.substring(0, foundIndex + valueToFind.length() + 1);
                         if (!neighbourCharsString.endsWith(" ")) {
                             foundIndex = -1;
                         }
-                    } //Szukana na koncu dokumentu
+                    }
                     else if (foundIndex + valueToFind.length() == document.length()) {
                         String neighbourCharsString = document.substring(foundIndex - 1, foundIndex + valueToFind.length());
                         if (!neighbourCharsString.startsWith(" ")) {
@@ -202,13 +184,11 @@ public class SearchWindow2 extends javax.swing.JFrame {
                         String neighbourCharsString = document.substring(foundIndex - 1, foundIndex + valueToFind.length() + 1);
                         if (!neighbourCharsString.startsWith(" ") && !neighbourCharsString.endsWith(" ")) {
                             foundIndex = -1;
-                            //Niecale slowo.
                         }
                     }
                 }
                 else
                 {
-                    //Zawiera spacje = nie cale slowo
                     foundIndex = -1;
                 }
             }
@@ -223,14 +203,14 @@ public class SearchWindow2 extends javax.swing.JFrame {
                 }
                 mainFrame.area.setCaretPosition(foundIndex + valueToFind.length());
                 //mainFrame.toFront();
-                JOptionPane.showMessageDialog(this, "Znaleziono.");
+                JOptionPane.showMessageDialog(this, "Found.");
 
             } else {
-                JOptionPane.showMessageDialog(this, "Nie znaleziono!");
-                Object[] options = {"Tak", "Nie"};
+                JOptionPane.showMessageDialog(this, "Not found!");
+                Object[] options = {"Yes", "No"};
 
                 int n = JOptionPane.showOptionDialog(this,
-                        "Wyszukiwanie doszło do konca pliku. Zacząć od początku?",
+                        "Reached end of file. Start from beginning?",
                         "EOF",
                         JOptionPane.YES_NO_CANCEL_OPTION,
                         JOptionPane.QUESTION_MESSAGE,
@@ -248,7 +228,7 @@ public class SearchWindow2 extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Dokument jest pusty.");
+            JOptionPane.showMessageDialog(this, "File is empty.");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
